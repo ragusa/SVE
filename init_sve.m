@@ -17,7 +17,7 @@ npar.ndofs(1) = npar.porder*npar.nel+1;
 for i=2:npar.nphys
     npar.ndofs(i) = npar.ndofs(1);
 end
-npar.nnz=(2*npar.porder+1)*npar.nphys; % nnz per row of J; about 2 mass matrices for 2 physics
+npar.nnz_row=(2*npar.porder+1)*npar.nphys; % nnz per row of J; about 2 mass matrices for 2 physics
 
 % connectivity
 gn=zeros(npar.nel,npar.nphys*(npar.porder+1));
@@ -54,7 +54,6 @@ dat.bc=bc; clear bc;
 
 % compute the mass matrix
 compute_mass_matrix()
-
 
 % initial values
 h=ones(npar.ndofs(1),1);
@@ -140,7 +139,7 @@ for i=1:length(Dirichlet_nodes);% loop on the number of constraints
 end
 
 % store in structure
-dat.Mass=A; clear A;
+npar.Mass=A; clear A;
 
 return
 end
