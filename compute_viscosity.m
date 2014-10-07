@@ -42,6 +42,8 @@ for iel=1:nel
     gnq=gn(iel,porder+2:end);
     h=u(gnh);
     q=u(gnq);
+    h_old=u_old(gnh);
+    q_old=u_old(gnq);
     
     % h, q
     local_h = b(:,:) * h;

@@ -1,9 +1,11 @@
 function u0 = init_sve
 
 global npar dat
-
+npar
 % domain length, L
 dat.L=1;
+% gravity accel
+dat.g=9.8;
 
 % mesh
 npar.nel=42; 
@@ -92,8 +94,14 @@ m=zeros(porder+1,porder+1);
 % piecewise constant and the material mesh matches the computational mesh
 poly_max=porder+1;
 [xq,wq] = GLNodeWt(poly_max);
+% store quadrature data
+npar.xq=xq;
+npar.wq=wq;
 % store shapeset
 [b,dbdx] =feshpln(xq,porder,npar.GLL);
+% save shapeset in npar struct
+npar.b=b;
+npar.dbdx=dbdx;
 % compute local matrices + load vector
 for i=1:porder+1
     for j=1:porder+1

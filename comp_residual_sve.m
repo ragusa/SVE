@@ -1,4 +1,4 @@
-function F=comp_residual_sve(u)
+function F=comp_residual_sve(u,time)
 
 % global
 global dat npar
