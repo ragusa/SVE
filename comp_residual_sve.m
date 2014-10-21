@@ -1,4 +1,4 @@
-function F=comp_residual_sve(u,time)
+function F=comp_residual_sve(u,u_old,u_older,time,dt)
 
 % global
 global dat npar
@@ -18,7 +18,7 @@ F=0*u;
 % initialize local residual vector
 local_res=zeros(porder+1,2);
 
-mu = compute_viscosity(u);
+mu = compute_viscosity(u,u_old,u_older,dt);
 
 % tfn ( dq/dx + d/dx(-mu dh/dx) )
 %   by parts:  tfn  dq/dx + mu dtfn/dx dh/dx) 

@@ -7,6 +7,8 @@ global dat npar
 
 % initialize data
 u0 = init_sve;
+u_old=u0;
+u_older=u0;
 
 t_end=10;
 n_steps=100;
@@ -20,13 +22,15 @@ for it=1:n_steps
     % compute time at the end of current time step
     time_1=(it  )*dt;
     % compute sve residual
-    resi=comp_residual_sve(u0,time_0)
+    resi=comp_residual_sve(u0,u_old,u_older,time_0,dt);
     % forward Euler
     u1=u0+dt*resi;
     % plots
     subplot(2,1,1);plot(npar.x,u1(1:npar.ndofs(1)));
     subplot(2,1,2);plot(npar.x,u1(npar.ndofs(1)+1:end));
     % next time step
+    u_older=u_old;
+    u_old=u0;
     u0=u1;
     time_0=time_1;
 end

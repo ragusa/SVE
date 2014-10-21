@@ -1,4 +1,4 @@
-function mu = compute_viscosity(u,u_old,u_older);
+function mu = compute_viscosity(u,u_old,u_older,dt)
 
 global dat npar
 % shortcuts
